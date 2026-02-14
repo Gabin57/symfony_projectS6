@@ -1,0 +1,15 @@
+###> Project Structure ###
+/Project/vendor/
+/Project/var/
+/Project/.env.local
+/Project/.env.*.local
+/Project/public/bundles/
+/Project/public/build/
+/Project/node_modules/
+###< Project Structure ###
+
+###> IDEs and System ###
+.idea/
+.vscode/
+.DS_Store
+###< IDEs and System ###

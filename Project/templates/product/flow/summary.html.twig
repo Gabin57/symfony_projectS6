@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Flow - Summary{% endblock %}
+
+{% block body %}
+<div class="mx-auto max-w-2xl py-8">
+    {% include 'product/flow/_stepper.html.twig' %}
+
+    <div class="bg-white shadow sm:rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4">Summary</h2>
+
+        <dl class="divide-y divide-gray-100">
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6 text-gray-900">Name</dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ product.name }}</dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6 text-gray-900">Price</dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ product.price }} €</dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6 text-gray-900">Type</dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ product.type }}</dd>
+            </div>
+             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6 text-gray-900">Description</dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ product.description }}</dd>
+            </div>
+            {% if product.type == 'physical' %}
+                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Weight</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ product.weight }}</dd>
+                </div>
+                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Stock</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ product.stock }}</dd>
+                </div>
+            {% elseif product.type == 'digital' %}
+                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">License Key</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ product.licenseKey }}</dd>
+                </div>
+            {% endif %}
+        </dl>
+
+        <form method="post" class="mt-6 flex items-center justify-between">
+            <a href="{{ path('admin_product_step', {'step': step - 1}) }}" class="text-sm font-semibold leading-6 text-gray-900">Back</a>
+            
+             {% if product.price > 100 %}
+                <div class="flex items-center">
+                    <input id="confirm-expensive" name="confirm" type="checkbox" required class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                    <label for="confirm-expensive" class="ml-2 block text-sm text-gray-900">Confirm for expensive item</label>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500">Finish</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Flow - Step {{ step }}{% endblock %}
+
+{% block body %}
+<div class="mx-auto max-w-2xl py-8">
+    {% include 'product/flow/_stepper.html.twig' %}
+
+    <div class="bg-white shadow sm:rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4">
+            {% if step == 1 %}Basic Information
+            {% elseif step == 2 %}Description
+            {% elseif step == 3 %}Specific Details
+            {% endif %}
+        </h2>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            
+            <div class="mt-6 flex items-center justify-between">
+                {% if step > 1 %}
+                    <a href="{{ path('admin_product_step', {'step': step - 1}) }}" class="text-sm font-semibold leading-6 text-gray-900">Back</a>
+                {% else %}
+                    <div></div>
+                {% endif %}
+                
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Next</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
